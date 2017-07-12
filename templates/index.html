@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% block link %}
+<script src="{{ url_for('static',filename='js/vue.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="container" id="search">
+	<div class="box box-info">
+		<div class="box-header"><i class="glyphicon glyphicon-search"></i>
+		<h4 class="box-title">Search</h4>
+		</div>
+		<div class="box-body" id=genes>
+			<div class="row search-bar">
+				<div class="col-lg-4 col-lg-offset-4">
+					<div class="input-group">
+						<span class="input-group-addon">Gene</span>
+						<input type="text" name="gene" class="form-control" placeholder="Genename" aria-describedby="basic-addon1">
+						<span class="input-group-addon" onclick="showConditionBar()"><b>+</b></span>
+						<span class="input-group-addon" id="search-addon1"><i class="glyphicon glyphicon-search" ></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="condition-bar">
+				<div class="row">
+					<div class="col-lg-1 col-lg-offset-2">
+						<div class="">
+							<span class="condition-label">Strain</span>
+							<select class="form-control" name="strain">
+								<option value="C57" selected="selected">C57</option>
+								<option value="Balb-c">Balb-c</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Gender</span>
+							<select class="form-control" name="gender">
+								<option value="m" selected="selected">Male</option>
+								<option value="f">Female</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Genotype</span>
+							<select class="form-control" name="genotype">
+								<option value="WT" selected="selected">WT</option>
+								<option value="KO-Lep">KO-ob</option>
+								<option value="KO-Lepr">KO-db</option>
+								<option value="flox-Rfwd3">flox-Rfwd3</option>
+								<option value="OE-Tet1">over expression Tet1</option>
+							</select>
+						</div>
+					</div>
+				<!--	<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Gene</span>
+							<select class="form-control" name="gene">
+								<option value="ob">ob</option>
+								<option value="db">db</option>
+								<option value="none" selected="selected">none</option>
+							</select>
+						</div>
+					</div> 
+				-->
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Celltype</span>
+							<select class="form-control" name="celltype">
+								<option value="WTE" selected="selected">WTE</option>
+								<option value="HC">HC</option>
+								<option value="KC">KC</option>
+								<option value="HSC">HSC</option>
+								<option value="LSEC">LSEC</option>
+								<option value="NPC">NPC</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Organelle</span>
+							<select class="form-control" name="organelle">
+								<option value="WCE" selected="selected">whole cell</option>
+								<option value="LDP">LDP</option>
+								<option value="NE">NE</option>
+								<option value="ER">ER</option>
+								<option value="Cytosolic">Cytosolic</option>
+								<option value="Lysosome">Lysosome</option>
+								<option value="Adipocyte">Adipocyte</option>
+								<option value="Mitochondria">Mitochondria</option>
+								<option value="Membrane Proteins">Membrane Proteins</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label" >Treatment</span>
+							<select class="form-control" name="treatment">
+								<option value="none">none</option>
+								<option value="HFD">HFD</option>
+								<option value="PHx">PHx</option>
+								<option value="LPS">LPS</option>
+								<option value="Fasting">Fasting</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="">
+							<span class="condition-label">Time(h)</span>
+							<select class="form-control" name="time">
+								<option value="0">0</option>
+								<option value="12">12</option>
+								<option value="24">24</option>
+								<option value="36">36</option>
+								<option value="48">48</option>
+								<option value="72">72</option>
+								<option value="120">120</option>
+								<option value="168">168</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-1 add-button">
+						<button class="btn btn-default" onclick="addType()">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="box box-info">
+					<div class="box-header">
+						<i class="glyphicon glyphicon-question-sign"></i>
+						<h4 class="box-title">What is Mouse Liver Portal?</h4>
+					</div>
+					<div class="box-body">
+						<p>The mouse liver portal incorporated variety of physiological and pathological conditions, such as gender, age, circadian rhythm, partial hepatectomy, nonalcoholic fatty liver disease, and so on.The iBAQ based proteome quantifications among hundreds of datasets in the liver portal were normalized to facilitate the correlation analysis between the alteration of protein expressions and the change of liver conditions.</p>
+					</div>
+				</div>
+				<div class="box box-info">
+					<div class="box-header">
+					<i class="glyphicon glyphicon-road"></i>
+					<h4 class="box-title">&nbsp;&nbsp;&nbsp;&nbsp;News and Updates</h4>
+					</div>
+					<div class="box-body">
+					<ul class="timeline">
+						<li class="time-label">
+							<span>1 Oct. 2016</span> 
+						</li>
+						<li>
+							<i class="glyphicon glyphicon-flag"></i>
+							<div class="timeline-item">
+								<div class="timeline-body">We started off</div>
+							</div>
+						</li>
+					</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="box box-info">
+					<div class="box-header">
+						<i class="glyphicon glyphicon-eye-open"></i>
+						<h4 class="box-title">Mouse Liver Function</h4>
+					</div>
+					<div class="box-body">
+						<img class="img-responsive" src="{{ url_for('static',filename='img/GO-KEGG.png') }}">
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+{% endblock %}
+{% block template %}
+<template id="type-template">
+	<div class="row type">
+		<div class="col-lg-4 col-lg-offset-2">
+			<form class="form-inline">
+				<div class="form-group">
+					<label></label>
+					<input class="form-control" style="width: 80%" type="text" readonly>
+					<span onclick="removeType(this)"><i class="glyphicon glyphicon-trash" id="search-addon1"></i></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</template>
+<template id="table-template">
+	<div id="genes-table" class="table-responsive">
+	<table class="table table-bordered table-hover">
+		<thead><tr><th>GeneID</th><th>GeneName</th></tr></thead>
+		<tbody>
+			<tr v-for="(name,id) in genes"><td><a v-bind:href="'/gene/'+id+'/'+name" target="_blank">{{id}}</td><td>{{name}}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</template>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('input[name=gene]').keydown(function (e) {
+		if(e.which==13){
+			var tf=$('input[name=gene]').val().trim();
+			searchGene()
+		}});
+		$('#search-addon1').click(function () {
+			searchGene()
+		});
+	});
+	function searchGene(){
+		var keyword=$("#search input[name=gene]").val().trim();
+		var typeNum=$(".type").length;
+		if(keyword==""){
+			if(typeNum!=2){
+				window.alert('Can not compare, you should compare two type')
+				return;
+			}else{
+				var types=[]
+				for(var i=0;i<typeNum;i++){
+					types.push("type"+i+"="+$(".type input")[i].value);
+				}
+				location.assign(encodeURI("/typePairwise?"+types.join("&")))
+			}
+		}else{
+			if(typeNum==0){
+				$.ajax({
+					type:"get",
+					url:"/searchGene/"+keyword,
+					dataType:"json",
+					success:function(result){
+						showResultGenes(result)
+					}
+				})
+			}else{
+
+			}
+		}
+	}
+	function showResultGenes(result){
+		var table=document.querySelector("#table-template").innerHTML;
+		$("#genes").append($(table));
+		new Vue({
+			el:"#genes-table",
+			data:{genes:result}
+		})
+	}
+	function showConditionBar(){
+		$(".condition-bar").fadeToggle();
+		$(".type").remove();
+	}
+	function addType(){
+		var names=["strain","gender","genotype","celltype","organelle","treatment","time"]
+		var typeAmount=document.querySelectorAll(".type").length
+		var type=document.querySelector("#type-template");
+		type.content.querySelector("label").textContent="Type"+(typeAmount+1);
+		var conditions=[];
+		names.forEach(function(name){
+			conditions.push(document.querySelector("select[name="+name+"]").value);
+		});
+		type.content.querySelector("input").value=conditions.join(",")
+		document.querySelector(".condition-bar").appendChild(type.content.cloneNode(true))
+	}
+	function removeType(e){
+		var type=$(e).prevAll("label").text();
+		var position=parseInt(type[type.length-1]);
+		var typeElements=$(".type");
+		$(typeElements[position-1]).remove()
+		for (var i=position;i<typeElements.length;i++){
+			$(typeElements[i]).find("label").text("Type"+i)
+		}
+	}
+</script>
+{% endblock %}
+

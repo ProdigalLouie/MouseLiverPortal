@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue测试</title>
+    <script type="text/javascript" src='static/js/vue.js'></script>
+    <script type="text/javascript" src='static/js/jquery-1.11.1.min.js'></script>
+    <style>
+        body {
+          font-family: Helvetica Neue, Arial, sans-serif;
+          font-size: 14px;
+          color: #444;
+        }
+
+        table {
+          border: 2px solid #42b983;
+          border-radius: 3px;
+          background-color: #fff;
+        }
+
+        th {
+          background-color: #42b983;
+          color: rgba(255,255,255,0.66);
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -user-select: none;
+        }
+
+        td {
+          background-color: #f9f9f9;
+        }
+
+        th, td {
+          min-width: 120px;
+          padding: 10px 20px;
+        }
+
+        th.active {
+          color: #fff;
+        }
+
+        th.active .arrow {
+          opacity: 1;
+        }
+
+        .arrow {
+          display: inline-block;
+          vertical-align: middle;
+          width: 0;
+          height: 0;
+          margin-left: 5px;
+          opacity: 0.66;
+        }
+
+        .arrow.asc {
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-bottom: 4px solid #fff;
+        }
+
+        .arrow.dsc {
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 4px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- demo root element -->
+    <div id="demo">
+        <form id="search">
+        Search <input name="query" v-model="filterKey">
+        <b>排序:</b>
+        <select name="key" id="key">
+            <option value="{{key}}" v-repeat="key : gridColumns">{{key | capitalize}}</option>
+        </select>
+        <select name="sequence" id="sequence">
+            <option value="default">默认</option>
+            <option value="small">由小到大</option>
+            <option value="big">由大到小</option>
+        </select>
+        <button id="btn">确认</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                <th v-repeat="key: gridColumns" v-on="click:sortBy(key)" v-class="active: sortKey == key">
+                    {{key | capitalize}}
+                    <span class="arrow" v-class="reversed[key] ? 'dsc' : 'asc'">
+                    </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr v-repeat="entry: gridData
+                | filterBy filterKey
+                | orderBy sortKey reversed[sortKey]">
+                    <td v-repeat="key: gridColumns">
+                        {{entry[key]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $('#btn').click(function (e) {
+            e.preventDefault();
+            var key = $('#key').val();
+            var sequence = $('#sequence').val();
+            console.log(key+'顺序'+sequence);
+            if (sequence === 'default') {
+                demo.sortKey = '';
+            }
+            else {
+                controller(key, sequence);
+            }
+            function controller(key, sequence) {
+                demo.sortKey = key;
+                if (sequence === 'big') {
+                    demo.reversed[key] = true;
+                }
+                else {
+                    demo.reversed[key] = false;
+                }
+            }
+        });
+        // bootstrap the demo
+        var demo = new Vue({
+          el: '#demo',
+          data: {
+            sortKey: '',
+            filterKey: '',
+            reversed: {},
+            search: '',
+            gridColumns: ['name', 'power'],
+            gridData: [
+              { name: 'Chuck Norris', power: Infinity },
+              { name: 'Bruce Lee', power: 9000 },
+              { name: 'Jacky Chang', power: 7000 },
+              { name: 'Jet Li', power: 8000 }
+            ]
+          },
+          compiled: function () {
+            // initialize reverse state
+            var self = this
+            this.gridColumns.forEach(function (key) {
+                self.reversed.$add(key, false)
+            })
+          },
+          methods: {
+            sortBy: function (key) {
+              this.sortKey = key
+              this.reversed[key] = !this.reversed[key]
+            }
+          }
+        })
+    </script>
+</body>
+</html>

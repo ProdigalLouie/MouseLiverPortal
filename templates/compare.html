@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block content %}
+		<div class="content">
+			<div class="container">
+				<div class="row">
+				<form role="form">
+				<div class="col-lg-1">
+					<div class="form-group">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+							Strain
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation">
+								<label><input type="radio" name="strain" value="C57" checked=True>C57</label>
+							</li>
+							<li role="presentation">
+								<label><input type="radio" name="strain" value="Balb-c">Balb-c</label>
+							</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="form-group">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
+							Gender	
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+							<li role="presentation">
+								<label><input type="radio" name="gender" value="M" checked=True>Male</label>
+							</li>
+							<li role="presentation">
+								<label><input type="radio" name="gender" value="F">Female</label>
+							</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="form-group">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
+							Genotype
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+							<li role="presentation"><input type="radio" name="genotype" value="WT" checked=True>WT</li>
+							<li role="presentation"><input type="radio" name="genotype" value="KO">KO</li>
+							<li role="presentation"><input type="radio" name="genotype" value="KD">KD</li>
+							<li role="presentation"><input type="radio" name="genotype" value="fl">flox</li>
+							<li role="presentation"><input type="radio" name="genotype" value="OE">over expression</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="form-group">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown">
+							Gene
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
+							<li role="presentation"><input type="radio" name="gene" value="ob">ob</li>
+							<li role="presentation"><input type="radio" name="gene" value="db">db</li>
+							<li role="presentation"><input type="radio" name="gene" value="none" checked=True>none</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown">
+							Celltype	
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5">
+							<li role="presentation"><label><input type="radio" name="celltype" value="WCE" checked=True>WCE</label></li>
+							<li role="presentation"><label><input type="radio" name="celltype" value="HC">HC</label></li>
+							<li role="presentation"><label><input type="radio" name="celltype" value="KC">KC</label></li>
+							<li role="presentation"><label><input type="radio" name="celltype" value="HSC">HSC</label></li>
+							<li role="presentation"><label><input type="radio" name="celltype" value="LSEC">LSEC</label></li>
+							<li role="presentation"><label><input type="radio" name="celltype" value="NPC">NPC</label></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu6" data-toggle="dropdown">
+							Organelle
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu6">
+							<li role="presentation"><label><input type="radio" name="organelle" value="WC" checked=True>whole cell</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="LDP">LDP</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="NE">NE</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="ER">ER</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="Cytosolic">Cytosolic</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="Lysosome">Lysosome</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="Adipocyte">Adipocyte</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="Mitochondria">Mitochondria</label></li>
+							<li role="presentation"><label><input type="radio" name="organelle" value="membrane proteins">Membrane Proteins</label></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu7" data-toggle="dropdown">
+							Treatment
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu7">
+							<li role="presentation"><label><input type="radio" name="treatment" value="HFD">HFD</label></li>
+							<li role="presentation"><label><input type="radio" name="treatment" value="PHx">PHx</label></li>
+							<li role="presentation"><label><input type="radio" name="treatment" value="Fasting">Fasting</label></li>
+							<li role="presentation"><label><input type="radio" name="treatment" value="LPS">LPS</label></li>
+							<li role="presentation"><label><input type="radio" name="treatment" value="none" checked=True>None</label></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu8" data-toggle="dropdown">
+							Time
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu8">
+							<li role="presentation"><label><input type="radio" name="time" value="0h" checked=True>0h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="12h">12h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="24h">24h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="36h">36h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="42h">42h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="48h">48h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="3d">3d</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="96h">96h</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="5d">5d</label></li>
+							<li role="presentation"><label><input type="radio" name="time" value="7d">7d</label></li>
+						</ul>
+					</div>
+				</div>
+				</form>
+				<div class="col-lg-1">
+					<button class="btn" onclick="addType()">Add</button>
+				</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<input style="min-width: 500px" type="text" name="type1">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input style="min-width: 500px" type="text" name="type2">
+					</div>
+					<div class="col-lg-1">
+						<button class="btn" onclick="getPairwise()">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+{% block script %}
+		<script type="text/javascript">
+			function addType(){
+				if($("input[name=type1]").val()){
+					var type2=$("input[name=strain]:checked").val()+","+$("input[name=gender]:checked").val()+","+$("input[name=genotype]:checked").val()+","+$("input[name=gene]:checked").val()+","+$("input[name=celltype]:checked").val()+","+$("input[name=organelle]:checked").val()+","+$("input[name=treatment]:checked").val()+","+$("input[name=time]:checked").val();
+					$("input[name=type2]").val(type2);
+				}else{
+					var type1=$("input[name=strain]:checked").val()+","+$("input[name=gender]:checked").val()+","+$("input[name=genotype]:checked").val()+","+$("input[name=gene]:checked").val()+","+$("input[name=celltype]:checked").val()+","+$("input[name=organelle]:checked").val()+","+$("input[name=treatment]:checked").val()+","+$("input[name=time]:checked").val();
+					$("input[name=type1]").val(type1);
+				}
+			}
+			function getPairwise(){
+				var type1=$("input[name=type1]").val();
+				var type2=$("input[name=type2]").val();
+				window.open("typePairwise/"+type1+"/"+type2);
+			}
+		</script>
+{% endblock %}

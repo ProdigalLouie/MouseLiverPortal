@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block link %}
+<script src="{{ url_for('static',filename='js/vue.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div id="app" class="container table-responsive">
+    <h3>Totally 12697 gene express in mouse liver</h3>
+        <table id="genes-table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th v-for="col in columns" v-on:click="sort">{{col}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="gene in genes">
+                    <td v-for="col in columns">
+                        {{gene[col]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$.ajax({
+    type:"get",
+    url:"/getData",
+    dataType:"json",
+    success:function(result){
+        new Vue({
+            el: '#genes-table',
+            data: {
+                genes:result['data'],
+                columns:['GeneID','GeneSymbol','Chromosome','Start','End','Identified num','TF'],
+            }
+        })
+    }
+})
+</script>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block link %}
+    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/dataTool.min.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container table-responsive">
+        <p>Type1:{{ type1str }}</p>
+        <p>Type2:{{ type2str }}</p>
+        <table class="tissue-table table table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th>Gene name</th>
+                    <th>Type1( log10 iBAQ )</th>
+                    <th>Type2( log10 iBAQ )</th>
+                    <th>Boxplot</th>
+                    <th>Pvalue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for geneID in geneIDList %}
+                    <tr>
+                        <td><a href="{{ url_for('.gene',geneID=geneID,geneName=type1[geneID]['geneName']) }}" target="_blank">{{ type1[geneID]['geneName'] }}</a></td>
+                        <td>{{ "%.3f"|format(type1[geneID]['median']) }}</td>
+                        <td>{{ "%.3f"|format(type2[geneID]['median']) }}</td>
+                        <td><div style="min-height: 200px;max-width: 400px" id="{{ 'boxplot'+geneID|string }}"></div></td>
+                        {% if pvalue[geneID]==None %}
+                        <td>--</td>
+                        {% else %}
+                        <td>{{ "%.2e"|format(pvalue[geneID]) }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block script %}
+		<script type="text/javascript">
+            var geneIDList={{ geneIDList|tojson }};
+            var type1={{ type1|tojson }};
+            var type2={{ type2|tojson }};
+            for (var i=0;i<geneIDList.length;i++){
+                var myChart = echarts.init(document.getElementById("boxplot"+geneIDList[i]));
+                var data = echarts.dataTool.prepareBoxplotData([type1[geneIDList[i]]['data'],type2[geneIDList[i]]['data']]);
+                option = {
+                    title: [
+                        {
+                            text: '',
+                            left: 'center',
+                        }
+                    ],
+                    tooltip: {
+                        trigger: 'item',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: {
+                        right: 'auto',
+                        bottom: '15%'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: ['Type1','Type2'],
+                        boundaryGap: true,
+                        nameGap: 30,
+                        splitArea: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'log10 iBAQ',
+                        splitArea: {
+                            show: true
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'boxplot',
+                            type: 'boxplot',
+                            data: data.boxData,
+                            tooltip: {
+                                formatter: function (param) {
+                                    return [
+                                        'Experiment ' + param.name + ': ',
+                                        'upper: ' + param.data[4],
+                                        'Q3: ' + param.data[3],
+                                        'median: ' + param.data[2],
+                                        'Q1: ' + param.data[1],
+                                        'lower: ' + param.data[0]
+                                    ].join('<br/>')
+                                }
+                            }
+                        },
+                        {
+                            name: 'outlier',
+                            type: 'scatter',
+                            data: data.outliers
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            }
+            
+		</script>
+{% endblock %}
