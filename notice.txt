@@ -1,0 +1,6 @@
+MySQL:
+group_concat_max_len=18446744073709551615
+bind-address            = 0.0.0.0
+
+flask + vue.js:
+{{ data }} {{data}}
